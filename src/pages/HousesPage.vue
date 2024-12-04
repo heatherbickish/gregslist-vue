@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from "@/AppState";
+import HouseForm from "@/components/HouseForm.vue";
 import HouseListings from "@/components/HouseListings.vue";
 import { housesService } from "@/services/HousesService";
 import { logger } from "@/utils/Logger";
@@ -30,6 +31,12 @@ async function getHouses(){
   <section class="row mb-3">
       <div class="col-12">
         <h1 class="text-center">Houses</h1>
+      </div>
+    </section>
+
+    <section class="row justify-content-center">
+      <div class="col-md-10">
+        <HouseForm/>
       </div>
     </section>
 
