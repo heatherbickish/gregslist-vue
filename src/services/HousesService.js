@@ -8,7 +8,7 @@ class HousesService {
     const response = await api.post('api/houses', editableHouseData)
     logger.log('created house🌟🏠', response.data)
     const house = new House(response.data)
-    AppState.houses.push(house)
+    AppState.houses.unshift(house)
   }
   async getHouses() {
     const response = await api.get('api/houses')

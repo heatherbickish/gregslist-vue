@@ -1,8 +1,11 @@
 <script setup>
+import { AppState } from "@/AppState";
 import { housesService } from "@/services/HousesService";
 import { logger } from "@/utils/Logger";
 import Pop from "@/utils/Pop";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+
+const account = computed(()=>AppState.account)
 
 const editableHouseData = ref({
 bedrooms: 0,
@@ -37,7 +40,7 @@ async function createHouse() {
 
 
 <template>
-<div>
+<div v-if="account != null">
   <form @submit.prevent="createHouse()">
     <div class="form-floating mb-3">
       <input v-model="editableHouseData.bedrooms" type="number" class="form-control" id="bedrooms" requrired>
