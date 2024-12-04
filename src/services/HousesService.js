@@ -6,7 +6,11 @@ import { AppState } from "@/AppState.js"
 class HousesService {
   async deleteHouse(houseId) {
     const response = await api.delete(`api/houses/${houseId}`)
-    logger.log('deleted house', response.data)
+    const houseIndex = AppState.houses.findIndex(house => house.id == houseId)
+    if (houseIndex == -1) {
+      throw new Error('You messed up big time on findIndex sucka')
+    }
+    AppState.houses.splice(houseIndex, 1)
   }
   async createHouse(editableHouseData) {
     const response = await api.post('api/houses', editableHouseData)
