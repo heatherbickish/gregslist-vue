@@ -21,6 +21,11 @@
               <button class="btn btn-success">Houses 🏠</button>
             </router-link>
           </span>
+          <span class="ms-2">
+            <router-link :to="{name: 'Jobs'}">
+              <button class="btn btn-success">Jobs 💪</button>
+            </router-link>
+          </span>
         </div>
       </div>
     </section>
