@@ -16,6 +16,11 @@
           <router-link :to="{ name: 'Cars' }">
             <button class="btn btn-success">Cars 🚗</button>
           </router-link>
+          <span class="ms-2">
+            <router-link :to="{name: 'Houses'}">
+              <button class="btn btn-success">Houses 🏠</button>
+            </router-link>
+          </span>
         </div>
       </div>
     </section>
