@@ -4,9 +4,12 @@ import { House } from "@/models/House.js"
 import { AppState } from "@/AppState.js"
 
 class HousesService {
+  async deleteHouse(houseId) {
+    const response = await api.delete(`api/houses/${houseId}`)
+    logger.log('deleted house', response.data)
+  }
   async createHouse(editableHouseData) {
     const response = await api.post('api/houses', editableHouseData)
-    logger.log('created house🌟🏠', response.data)
     const house = new House(response.data)
     AppState.houses.unshift(house)
   }

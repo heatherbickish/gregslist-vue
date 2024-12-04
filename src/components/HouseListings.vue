@@ -1,9 +1,32 @@
 <script setup>
+import { AppState } from "@/AppState";
 import { House } from "@/models/House";
+import { housesService } from "@/services/HousesService";
+import { logger } from "@/utils/Logger";
+import Pop from "@/utils/Pop";
+import { computed } from "vue";
 
-defineProps({
-  houseProp:{type: House, required: true}
+const props = defineProps({
+  houseProp: {type: House, required: true}
 })
+
+const account = computed(()=> AppState.account)
+
+async function deleteHouse(){
+  try {
+    const message =  `Are you sure you want to delete this house from ${props.houseProp.year}?`
+    const confirmed = await Pop.confirm(message)
+    if(!confirmed){return}
+    const houseId = props.houseProp.id
+    await housesService.deleteHouse(houseId)
+  }
+  catch (error){
+    Pop.meow(error);
+    logger.log('deleting house', error)
+  }
+}
+
+
 </script>
 
 
@@ -25,7 +48,10 @@ defineProps({
           <p>Listing Created on: {{ houseProp.createdAt.toLocaleDateString() }}</p>
           <p>"{{ houseProp.description }}"</p>
         </div>
-        <div class="text-end">
+        <div class="d-flex justify-content-end gap-3 align-items-center">
+          <button v-if="account?.id == houseProp.creatorId" @click="deleteHouse()" class="btn btn-danger" type="button" title="Delete House">
+            <i class="mdi mdi-delete"></i>
+          </button>
           <span>{{ houseProp.creator.name }}</span>
           <img :src="houseProp.creator.picture" :alt="houseProp.creator.name" class="creator-img ms-3">
         </div>
