@@ -20,10 +20,14 @@ defineProps({
           <span class="fs-5">Bedrooms: {{ houseProp.bedrooms }}</span>
           <span class="fs-5">Bathrooms: {{ houseProp.bathrooms }}</span>
         </div>
-        <div> 
+        <div class="mt-3"> 
           <p>Levels: {{ houseProp.levels }}</p>
           <p>Listing Created on: {{ houseProp.createdAt.toLocaleDateString() }}</p>
           <p>"{{ houseProp.description }}"</p>
+        </div>
+        <div class="text-end">
+          <span>{{ houseProp.creator.name }}</span>
+          <img :src="houseProp.creator.picture" :alt="houseProp.creator.name" class="creator-img ms-3">
         </div>
       </div>
     </div>
@@ -40,6 +44,13 @@ defineProps({
 .house-img{
   height: 45dvh;
   width:100%;
+  object-fit: cover;
+}
+
+.creator-img{
+  height:10dvh;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
   object-fit: cover;
 }
 </style>
